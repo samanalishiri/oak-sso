@@ -3,14 +3,16 @@ var CREATE_STATUS = 201;
 
 var SUCCESS_STATUS = 200;
 
-function postAjaxRequest(url, data, success) {
+function postAjaxRequest(url, data, success, afterSuccess) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("post", url, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === CREATE_STATUS)
+        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === CREATE_STATUS) {
             success(xhttp);
+            afterSuccess(xhttp);
+        }
     };
     xhttp.send(data);
 }
