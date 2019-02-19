@@ -3,7 +3,7 @@ package com.saman.sso.rest.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class BasicClientInfoModel {
+public class ClientModel {
 
     private String id;
 

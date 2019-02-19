@@ -9,6 +9,6 @@ public class RegisterClientController implements BaseController {
     @Override
     @GetMapping(value = {"client/view.page","/"})
     public String view(){
-        return "register_client";
+        return "register_client.html";
     }
 }

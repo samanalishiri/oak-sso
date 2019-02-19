@@ -1,0 +1,33 @@
+-- insert into users (ID,
+--                        USERNAME,
+--                        PASSWD,
+--                        EMAIL,
+--                        NON_EXPIRED,
+--                        NON_LOCKED,
+--                        PASSWORD_NON_EXPIRED,
+--                        ENABLED)
+-- values (1,
+--         'user',
+--         '$2a$12$FoEYfy0JoyQzXudv5jF7SOKXFV4VlFkThFWeqRuuOkn8f40xskXhq',
+--         'samanalishiri@gmail.com',
+--         true,
+--         true,
+--         true,
+--         true);
+--
+--
+-- insert into authority (
+-- ID,
+-- AUTHORITY,
+-- DESCRIPTION,
+-- ENABLED)
+-- values (
+-- 1,
+-- 'admin',
+-- 'admin role',
+-- true );
+--
+-- insert into users_authority(
+-- user_info_id, authority_id)
+-- values(
+-- 1,1);

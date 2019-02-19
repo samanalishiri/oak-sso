@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "oauth_client_details", schema = "sso")
 public class OauthClientDetailsEntity {
-    private String id;
     private String clientId;
     private String resourceIds;
     private String clientSecret;
@@ -24,15 +23,6 @@ public class OauthClientDetailsEntity {
     private String autoapprove;
 
     @Id
-    @Column(name = "id", nullable = false, length = 255)
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Column(name = "client_id", nullable = false, length = 255)
     public String getClientId() {
         return clientId;
