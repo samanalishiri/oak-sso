@@ -18,22 +18,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
 
-@Entity(name = AuthorityEntity.ENTITY_NAME)
-@Table(name = AuthorityEntity.TABLE_NAME, schema = "SSO")
+@Entity
+@Table(name = "Authority", schema = "SSO")
 @Component
 public class AuthorityEntity implements GrantedAuthority {
 
-    public static final String TABLE_NAME = "AUTHORITY";
-    public static final String ENTITY_NAME = "authorityEntity";
-    public static final String UNDER_LINE = "_";
-    public static final String ID_SUFFIX = UNDER_LINE + "ID";
-    public static final String SEQ_SUFFIX = UNDER_LINE + "SEQ";
-    public static final String GEN_SUFFIX = UNDER_LINE + "GEN";
-
     @Id
-    @Column(name = TABLE_NAME + ID_SUFFIX, unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = TABLE_NAME + GEN_SUFFIX)
-    @SequenceGenerator(name = TABLE_NAME + GEN_SUFFIX, sequenceName = TABLE_NAME + SEQ_SUFFIX)
+    @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Authority_GEN")
+    @SequenceGenerator(name = "Authority_GEN", sequenceName = "Authority_SEQ")
     private Long id;
 
     @Column(name = "AUTHORITY", nullable = false)
@@ -45,7 +38,6 @@ public class AuthorityEntity implements GrantedAuthority {
     @Column(name = "ENABLED")
     @Type(type = "boolean")
     private boolean enabled = true;
-
 
     @ManyToMany(mappedBy = "authorities", cascade = CascadeType.ALL)
     private List<UserEntity> users;

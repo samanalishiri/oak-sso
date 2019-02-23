@@ -3,6 +3,8 @@ package com.saman.sso.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
@@ -11,46 +13,48 @@ import java.util.Objects;
 @Entity
 @Table(name = "oauth_approvals", schema = "sso")
 public class OauthApprovalsEntity {
-    private Integer id;
-    private String userId;
-    private String clientId;
+
+    private Long id;
+    private String userid;
+    private String clientid;
     private String scope;
     private String status;
-    private Timestamp expiresAt;
-    private Timestamp lastModifiedAt;
+    private Timestamp expiresat;
+    private Timestamp lastmodifiedat;
 
     @Id
-    @Column(name = "id", nullable = false)
-    public Integer getId() {
+    @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "user_id", nullable = true, length = 255)
-    public String getUserId() {
-        return userId;
+    @Column(name = "USERID")
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    @Basic
-    @Column(name = "client_id", nullable = true, length = 255)
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     @Basic
-    @Column(name = "scope", nullable = true, length = 255)
+    @Column(name = "CLIENTID")
+    public String getClientid() {
+        return clientid;
+    }
+
+    public void setClientid(String clientid) {
+        this.clientid = clientid;
+    }
+
+    @Basic
+    @Column(name = "SCOPE")
     public String getScope() {
         return scope;
     }
@@ -60,7 +64,7 @@ public class OauthApprovalsEntity {
     }
 
     @Basic
-    @Column(name = "status", nullable = true, length = 255)
+    @Column(name = "STATUS")
     public String getStatus() {
         return status;
     }
@@ -70,23 +74,23 @@ public class OauthApprovalsEntity {
     }
 
     @Basic
-    @Column(name = "expires_at", nullable = false)
-    public Timestamp getExpiresAt() {
-        return expiresAt;
+    @Column(name = "EXPIRESAT")
+    public Timestamp getExpiresat() {
+        return expiresat;
     }
 
-    public void setExpiresAt(Timestamp expiresAt) {
-        this.expiresAt = expiresAt;
+    public void setExpiresat(Timestamp expiresat) {
+        this.expiresat = expiresat;
     }
 
     @Basic
-    @Column(name = "last_modified_at", nullable = false)
-    public Timestamp getLastModifiedAt() {
-        return lastModifiedAt;
+    @Column(name = "LASTMODIFIEDAT")
+    public Timestamp getLastmodifiedat() {
+        return lastmodifiedat;
     }
 
-    public void setLastModifiedAt(Timestamp lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
+    public void setLastmodifiedat(Timestamp lastmodifiedat) {
+        this.lastmodifiedat = lastmodifiedat;
     }
 
     @Override
@@ -94,17 +98,16 @@ public class OauthApprovalsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OauthApprovalsEntity that = (OauthApprovalsEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(clientId, that.clientId) &&
+        return Objects.equals(userid, that.userid) &&
+                Objects.equals(clientid, that.clientid) &&
                 Objects.equals(scope, that.scope) &&
                 Objects.equals(status, that.status) &&
-                Objects.equals(expiresAt, that.expiresAt) &&
-                Objects.equals(lastModifiedAt, that.lastModifiedAt);
+                Objects.equals(expiresat, that.expiresat) &&
+                Objects.equals(lastmodifiedat, that.lastmodifiedat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, clientId, scope, status, expiresAt, lastModifiedAt);
+        return Objects.hash(userid, clientid, scope, status, expiresat, lastmodifiedat);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * Created by Administrator on 9/29/2017.
+ * Saman Alishiri, samanalishiri@gmail.com
  */
 @Service(UserDetailsServiceImpl.BEAN_NAME)
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    @Qualifier(CustomPasswordEncoder.NAME)
+    @Qualifier(value = "userPasswordEncoder")
     private PasswordEncoder passwordEncoder;
 
     @Override

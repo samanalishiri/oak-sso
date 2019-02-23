@@ -12,7 +12,7 @@ import java.util.Objects;
 public class OauthClientDetailsEntity {
     private String clientId;
     private String resourceIds;
-    private String clientSecret;
+    private String clienTusersSecret;
     private String scope;
     private String authorizedGrantTypes;
     private String webServerRedirectUri;
@@ -23,7 +23,7 @@ public class OauthClientDetailsEntity {
     private String autoapprove;
 
     @Id
-    @Column(name = "client_id", nullable = false, length = 255)
+    @Column(name = "CLIENT_ID")
     public String getClientId() {
         return clientId;
     }
@@ -33,7 +33,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "resource_ids", nullable = true, length = 255)
+    @Column(name = "RESOURCE_IDS")
     public String getResourceIds() {
         return resourceIds;
     }
@@ -43,17 +43,17 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "client_secret", nullable = true, length = 255)
-    public String getClientSecret() {
-        return clientSecret;
+    @Column(name = "CLIENT_SECRET")
+    public String getClienTusersSecret() {
+        return clienTusersSecret;
     }
 
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
+    public void setClienTusersSecret(String clienTusersSecret) {
+        this.clienTusersSecret = clienTusersSecret;
     }
 
     @Basic
-    @Column(name = "scope", nullable = true, length = 255)
+    @Column(name = "SCOPE")
     public String getScope() {
         return scope;
     }
@@ -63,7 +63,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "authorized_grant_types", nullable = true, length = 255)
+    @Column(name = "AUTHORIZED_GRANT_TYPES")
     public String getAuthorizedGrantTypes() {
         return authorizedGrantTypes;
     }
@@ -73,7 +73,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "web_server_redirect_uri", nullable = true, length = 255)
+    @Column(name = "WEB_SERVER_REDIRECT_URI")
     public String getWebServerRedirectUri() {
         return webServerRedirectUri;
     }
@@ -83,7 +83,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "authorities", nullable = true, length = 255)
+    @Column(name = "AUTHORITIES")
     public String getAuthorities() {
         return authorities;
     }
@@ -93,7 +93,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "access_token_validity", nullable = true)
+    @Column(name = "ACCESS_TOKEN_VALIDITY")
     public Integer getAccessTokenValidity() {
         return accessTokenValidity;
     }
@@ -103,7 +103,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "refresh_token_validity", nullable = true)
+    @Column(name = "REFRESH_TOKEN_VALIDITY")
     public Integer getRefreshTokenValidity() {
         return refreshTokenValidity;
     }
@@ -113,7 +113,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "additional_information", nullable = true, length = -1)
+    @Column(name = "ADDITIONAL_INFORMATION")
     public String getAdditionalInformation() {
         return additionalInformation;
     }
@@ -123,7 +123,7 @@ public class OauthClientDetailsEntity {
     }
 
     @Basic
-    @Column(name = "autoapprove", nullable = true, length = 255)
+    @Column(name = "AUTOAPPROVE")
     public String getAutoapprove() {
         return autoapprove;
     }
@@ -139,7 +139,7 @@ public class OauthClientDetailsEntity {
         OauthClientDetailsEntity that = (OauthClientDetailsEntity) o;
         return Objects.equals(clientId, that.clientId) &&
                 Objects.equals(resourceIds, that.resourceIds) &&
-                Objects.equals(clientSecret, that.clientSecret) &&
+                Objects.equals(clienTusersSecret, that.clienTusersSecret) &&
                 Objects.equals(scope, that.scope) &&
                 Objects.equals(authorizedGrantTypes, that.authorizedGrantTypes) &&
                 Objects.equals(webServerRedirectUri, that.webServerRedirectUri) &&
@@ -152,6 +152,6 @@ public class OauthClientDetailsEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientId, resourceIds, clientSecret, scope, authorizedGrantTypes, webServerRedirectUri, authorities, accessTokenValidity, refreshTokenValidity, additionalInformation, autoapprove);
+        return Objects.hash(clientId, resourceIds, clienTusersSecret, scope, authorizedGrantTypes, webServerRedirectUri, authorities, accessTokenValidity, refreshTokenValidity, additionalInformation, autoapprove);
     }
 }

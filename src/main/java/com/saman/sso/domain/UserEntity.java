@@ -17,22 +17,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
 
-@Entity(name = UserEntity.ENTITY_NAME)
-@Table(name = UserEntity.TABLE_NAME, schema = "SSO")
+@Entity
+@Table(name = "USERS", schema = "SSO")
 @Component
 public class UserEntity implements UserDetails {
 
-    public static final String TABLE_NAME = "USERS";
-    public static final String ENTITY_NAME = "userEntity";
-    public static final String UNDER_LINE = "_";
-    public static final String ID_SUFFIX = UNDER_LINE + "ID";
-    public static final String SEQ_SUFFIX = UNDER_LINE + "SEQ";
-    public static final String GEN_SUFFIX = UNDER_LINE + "GEN";
 
     @Id
-    @Column(name = TABLE_NAME + ID_SUFFIX, unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = TABLE_NAME + GEN_SUFFIX)
-    @SequenceGenerator(name = TABLE_NAME + GEN_SUFFIX, sequenceName = TABLE_NAME + SEQ_SUFFIX)
+    @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_GEN")
+    @SequenceGenerator(name = "USERS_GEN", sequenceName = "USERS_SEQ")
     private Long id;
 
     @Column(name = "USERNAME", unique = true, nullable = false)
@@ -41,7 +35,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "PASSWD", nullable = false)
     private String password;
 
-    @Column(name = "EMAIL", unique = true, nullable = false)
+    @Column(name = "EMAIL", unique = true, nullable = true)
     private String email;
 
     @Column(name = "ENABLED")
@@ -61,9 +55,9 @@ public class UserEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = UserEntity.TABLE_NAME + "_" + AuthorityEntity.TABLE_NAME,
-            joinColumns = @JoinColumn(name = UserEntity.TABLE_NAME + UserEntity.ID_SUFFIX, referencedColumnName = UserEntity.TABLE_NAME + UserEntity.ID_SUFFIX),
-            inverseJoinColumns = @JoinColumn(name = AuthorityEntity.TABLE_NAME + AuthorityEntity.ID_SUFFIX, referencedColumnName = AuthorityEntity.TABLE_NAME + AuthorityEntity.ID_SUFFIX))
+    @JoinTable(name = "USERS_AUTHORITY",
+            joinColumns = @JoinColumn(name = "USERS_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
     private List<AuthorityEntity> authorities;
 
     public Long getId() {

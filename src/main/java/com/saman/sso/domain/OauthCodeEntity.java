@@ -7,16 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_refresh_token", schema = "sso")
-public class OauthRefreshTokenEntity {
-
+@Table(name = "oauth_code", schema = "sso")
+public class OauthCodeEntity {
     private Long id;
-    private String tokenId;
-    private byte[] token;
-    private Long authentication;
+    private String code;
+    private byte[] authentication;
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
@@ -30,32 +29,22 @@ public class OauthRefreshTokenEntity {
     }
 
     @Basic
-    @Column(name = "TOKEN_ID")
-    public String getTokenId() {
-        return tokenId;
+    @Column(name = "CODE")
+    public String getCode() {
+        return code;
     }
 
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
-
-    @Basic
-    @Column(name = "TOKEN")
-    public byte[] getToken() {
-        return token;
-    }
-
-    public void setToken(byte[] token) {
-        this.token = token;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Basic
     @Column(name = "AUTHENTICATION")
-    public Long getAuthentication() {
+    public byte[] getAuthentication() {
         return authentication;
     }
 
-    public void setAuthentication(Long authentication) {
+    public void setAuthentication(byte[] authentication) {
         this.authentication = authentication;
     }
 
@@ -63,14 +52,15 @@ public class OauthRefreshTokenEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OauthRefreshTokenEntity that = (OauthRefreshTokenEntity) o;
-        return Objects.equals(tokenId, that.tokenId) &&
-                Objects.equals(token, that.token) &&
-                Objects.equals(authentication, that.authentication);
+        OauthCodeEntity that = (OauthCodeEntity) o;
+        return Objects.equals(code, that.code) &&
+                Arrays.equals(authentication, that.authentication);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tokenId, token, authentication);
+        int result = Objects.hash(code);
+        result = 31 * result + Arrays.hashCode(authentication);
+        return result;
     }
 }
