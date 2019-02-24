@@ -1,0 +1,221 @@
+{
+  "info": {
+    "_postman_id": "548e49b2-f539-47ee-84fc-1ecf75e25c4b",
+    "name": "sso",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "oauth-password",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "spring-security-oauth2-read-write-client-password1234",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "spring-security-oauth2-read-write-client",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "grant_type",
+              "value": "password",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "admin1234",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "spring-security-oauth2-read-write-client",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/oauth/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "oauth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "oauth-authorization-code",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "spring-security-oauth2-read-write-client-password1234",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "spring-security-oauth2-read-write-client",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "grant_type",
+              "value": "authorization_code",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "spring-security-oauth2-read-write-client",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "spring-security-oauth2-read-write-client-password1234",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "iU4cLQ",
+              "type": "text"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "http://localhost:9090/",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/oauth/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "oauth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "client-save",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "4a8c57a5-de75-4249-95e3-5c967360a690",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"id\":\"\",\r\n    \"clientName\":\"\",\r\n\r\n    \"redirectUri\":\"\",\r\n\r\n    \"clientType\":\"\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/client/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "client",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get-authorization-code",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {},
+        "url": {
+          "raw": "localhost:8080/oauth/authorize?response_type=code&client_id=spring-security-oauth2-read-write-client&redirect_uri=http://localhost:9090/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "oauth",
+            "authorize"
+          ],
+          "query": [
+            {
+              "key": "response_type",
+              "value": "code"
+            },
+            {
+              "key": "client_id",
+              "value": "spring-security-oauth2-read-write-client"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "http://localhost:9090/"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
