@@ -9,6 +9,6 @@ public class HomeController implements BaseController {
     @Override
     @GetMapping(value = "/")
     public String view() {
-        return "register_client.html";
+        return "home.html";
     }
 }

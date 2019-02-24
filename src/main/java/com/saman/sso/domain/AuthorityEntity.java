@@ -1,4 +1,5 @@
 package com.saman.sso.domain;
+
 /**
  * this entity store roles
  */
@@ -25,8 +26,8 @@ public class AuthorityEntity implements GrantedAuthority {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Authority_GEN")
-    @SequenceGenerator(name = "Authority_GEN", sequenceName = "Authority_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTHORITY_GEN")
+    @SequenceGenerator(name = "AUTHORITY_GEN", sequenceName = "AUTHORITY_SEQ")
     private Long id;
 
     @Column(name = "AUTHORITY", nullable = false)
