@@ -2,7 +2,7 @@ document.getElementById("button_save").addEventListener("click", () => save());
 
 function save() {
     postAjaxRequest("/client/save",
-        createModel(),
+        createClientModel(),
         (xhttp) => addRow(readModel(xhttp, "data")),
         (xhttp) => closeDialog());
 }
@@ -12,7 +12,7 @@ function view(id) {
 }
 
 function edit() {
-    postAjaxRequest("/client/edit", createModel(), (xhttp) => addRow(readModel(xhttp, "data")));
+    postAjaxRequest("/client/edit", createClientModel(), (xhttp) => addRow(readModel(xhttp, "data")));
 }
 
 function remove(id) {
@@ -21,20 +21,20 @@ function remove(id) {
 
 function bindModel(model){
     document.getElementById("client_id").value = model.id;
-    document.getElementById("client_name").value = model.clientName;
+    document.getElementById("client_name").value = model.name;
     document.getElementById("redirect_url").value = model.redirectUrl;
-    document.getElementById("client_type").value = model.clientType;
+    document.getElementById("client_type").value = model.type;
 }
 
-function createModel() {
-    var model = {
+function createClientModel() {
+    var client = {
         "id": document.getElementById("client_id").value,
-        "clientName": document.getElementById("client_name").value,
+        "name": document.getElementById("client_name").value,
         "redirectUrl": document.getElementById("redirect_url").value,
-        "clientType": document.getElementById("client_type").value,
+        "type": document.getElementById("client_type").value,
     };
 
-    return JSON.stringify(model);
+    return JSON.stringify(client);
 }
 
 function openDialog() {

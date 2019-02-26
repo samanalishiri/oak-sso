@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
+import static com.saman.sso.util.NumberUtils.generateUUID;
 
 @RestController
 @RequestMapping(value = "/", produces = "application/json")
@@ -24,17 +24,18 @@ public class ClientRest {
     public ResponseEntity<Object> save(@RequestBody ClientModel model) {
 
         ClientDetailsModel app = new ClientDetailsModel();
-        app.setName(model.getClientName());
+        app.setClientName(model.getName());
         app.addRedirectUri(model.getRedirectUri());
-        app.setClientType(model.getClientType());
-        app.setClientId(UUID.randomUUID().toString());
-        app.setClientSecret(UUID.randomUUID().toString());
-        app.setAccessTokenValidity(3000);
-        app.addScope("read_profile");
-        app.addScope("read_contacts");
+        app.setClientType(model.getType());
+        app.setClientId(generateUUID());
+        app.setClientSecret(generateUUID());
+        app.setAccessTokenValiditySeconds(model.getAccessTokenValiditySeconds());
+        app.setScopes(model.getScopes());
+        app.setAuthorizedGrantTypes(model.getAuthorizedGrantTypes());
 
         oauthClientDetailsService.addClientDetails(app);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(model);
     }
+
 }

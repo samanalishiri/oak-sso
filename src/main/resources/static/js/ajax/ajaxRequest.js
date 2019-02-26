@@ -9,10 +9,8 @@ function postAjaxRequest(url, data, success, afterSuccess) {
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === CREATE_STATUS) {
             success(xhttp);
             afterSuccess(xhttp);
-        }
     };
     xhttp.send(data);
 }
@@ -23,7 +21,6 @@ function getAjaxRequest(url, success){
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === SUCCESS_STATUS)
             success(xhttp);
     };
     xhttp.send();

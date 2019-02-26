@@ -3,62 +3,35 @@ package com.saman.sso.rest.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class ClientDetailsModel implements ClientDetails {
 
     private String clientId;
-
-    private String clientSecret;
-
-    private ClientType clientType;
-
     private Set<String> resourceIds = new HashSet<>();
-
-    private Set<String> scope = new HashSet<>();
-
-    private Set<String> webServerRedirectUri = new HashSet<>();
-
-    private int accessTokenValidity;
-
-    private Map<String, Object> additionalInformation = new HashMap<>();
-
-    public void setName(String name) {
-        additionalInformation.put("property1", name);
-    }
-
-    public void setClientType(ClientType clientType) {
-        additionalInformation.put("client_type", clientType.name());
-    }
-
-    public void setAccessTokenValidity(int accessTokenValidity) {
-        this.accessTokenValidity = accessTokenValidity;
-    }
-
-    public void addRedirectUri(String redirectUri) {
-        this.webServerRedirectUri.add(redirectUri);
-    }
-
-    public void addScope(String scope) {
-        this.scope.add(scope);
-    }
-
-    public void addResourceId(String resourceId) {
-        this.resourceIds.add(resourceId);
-    }
+    private ClientType clientType;
+    private String clientSecret;
+    private Set<String> scopes = new HashSet<>();
+    private Set<String> authorizedGrantTypes = new HashSet<>();
+    private Set<String> registeredRedirectUri = new HashSet<>();
+    private Integer accessTokenValiditySeconds;
+    private HashMap<String, Object> additionalInformation = new HashMap<>();
+    private boolean autoApprove = false;
+    private List<GrantedAuthority> authorities = new ArrayList<>();
+    private Integer refreshTokenValiditySeconds;
+    private String clientName;
 
     @Override
     public String getClientId() {
         return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
     }
 
     @Override
@@ -68,7 +41,7 @@ public class ClientDetailsModel implements ClientDetails {
 
     @Override
     public boolean isSecretRequired() {
-        return clientType == ClientType.CONFIDENTIAL;
+        return Objects.equals(clientType, ClientType.CONFIDENTIAL);
     }
 
     @Override
@@ -76,51 +49,41 @@ public class ClientDetailsModel implements ClientDetails {
         return clientSecret;
     }
 
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
     @Override
     public boolean isScoped() {
-        return scope.size() > 0;
+        return !scopes.isEmpty();
     }
 
     @Override
     public Set<String> getScope() {
-        return Collections.unmodifiableSet(scope);
+        return Collections.unmodifiableSet(scopes);
     }
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        Set<String> grantTypes = new HashSet<>();
-        grantTypes.add("authorization_code");
-        grantTypes.add("refresh_token");
-        return grantTypes;
+        return authorizedGrantTypes;
+    }
+
+    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
+        this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
     @Override
     public Set<String> getRegisteredRedirectUri() {
-        return Collections.unmodifiableSet(webServerRedirectUri);
+        return Collections.unmodifiableSet(registeredRedirectUri);
+    }
+
+    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
+        this.registeredRedirectUri = registeredRedirectUri;
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return new HashSet<>();
+        return Collections.unmodifiableList(authorities);
     }
 
-    @Override
-    public Integer getAccessTokenValiditySeconds() {
-        return accessTokenValidity;
-    }
-
-    @Override
-    public Integer getRefreshTokenValiditySeconds() {
-        return null;
-    }
-
-    @Override
-    public boolean isAutoApprove(String scope) {
-        return false;
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
@@ -128,4 +91,78 @@ public class ClientDetailsModel implements ClientDetails {
         return additionalInformation;
     }
 
+    @Override
+    public Integer getAccessTokenValiditySeconds() {
+        return accessTokenValiditySeconds;
+    }
+
+    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
+        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
+    }
+
+    @Override
+    public Integer getRefreshTokenValiditySeconds() {
+        return refreshTokenValiditySeconds;
+    }
+
+    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
+        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
+    }
+
+    @Override
+    public boolean isAutoApprove(String scope) {
+        return autoApprove;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public void setResourceIds(Set<String> resourceIds) {
+        this.resourceIds = resourceIds;
+    }
+
+    public ClientType getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(ClientType clientType) {
+        this.clientType = clientType;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public void setScopes(Set<String> scopes) {
+        this.scopes = scopes;
+    }
+
+    public void setAdditionalInformation(HashMap<String, Object> additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
+    public boolean isAutoApprove() {
+        return autoApprove;
+    }
+
+    public void setAutoApprove(boolean autoApprove) {
+        this.autoApprove = autoApprove;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String name) {
+        additionalInformation.put("clientName", name);
+    }
+
+    public void addRedirectUri(String uri) {
+        registeredRedirectUri.add(uri);
+    }
+
+    public void addScope(String scope) {
+        scopes.add(scope);
+    }
 }

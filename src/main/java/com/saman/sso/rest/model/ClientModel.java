@@ -2,16 +2,25 @@ package com.saman.sso.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ClientModel {
 
     private String id;
 
-    private String clientName;
+    private String name;
 
     private String redirectUri;
 
-    private ClientType clientType;
+    private ClientType type;
+
+    private Set<String> scopes = new HashSet<>();
+
+    private Integer accessTokenValiditySeconds;
+
+    private Set<String> authorizedGrantTypes;
 
     public String getId() {
         return id;
@@ -21,12 +30,12 @@ public class ClientModel {
         this.id = id;
     }
 
-    public String getClientName() {
-        return clientName;
+    public String getName() {
+        return name;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRedirectUri() {
@@ -37,12 +46,35 @@ public class ClientModel {
         this.redirectUri = redirectUri;
     }
 
-    public ClientType getClientType() {
-        return clientType;
+    public ClientType getType() {
+        return type;
     }
 
-    public void setClientType(ClientType clientType) {
-        this.clientType = clientType;
+    public void setType(ClientType type) {
+        this.type = type;
     }
 
+    public Set<String> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(Set<String> scopes) {
+        this.scopes = scopes;
+    }
+
+    public Integer getAccessTokenValiditySeconds() {
+        return accessTokenValiditySeconds;
+    }
+
+    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
+        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
+    }
+
+    public Set<String> getAuthorizedGrantTypes() {
+        return authorizedGrantTypes;
+    }
+
+    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
+        this.authorizedGrantTypes = authorizedGrantTypes;
+    }
 }

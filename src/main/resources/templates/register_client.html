@@ -52,6 +52,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="client_scope"><span th:text="#{client.register.form.field.scope}"/></label>
+                <div>
+                    <select id="client_scope" name="client_scope" class="selectpicker form-control">
+                        <option value="READ">Read</option>
+                        <option value="WRITE">Write</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <button id="button_save" class="btn btn-primary" type="button">
                     <span th:text="#{form.button.register}"/>
                 </button>
