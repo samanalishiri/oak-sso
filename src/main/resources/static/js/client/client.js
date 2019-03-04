@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    $('.mdb-select').materialSelect();
+});
 
 function save() {
     postAjaxRequest("/client/save",

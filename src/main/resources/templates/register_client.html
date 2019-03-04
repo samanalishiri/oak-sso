@@ -28,35 +28,35 @@
             <div class="modal-body dialog-padding">
                 <form role="form">
                     <input id="client_id" name="client_id" type="hidden" value=""/>
-                    <div class="input-group mb-3">
-                        <div class="input-group-append col-lg-4">
-                            <span class="input-group-text" th:text="#{client.register.form.field.name}"/>
+                    <div class="input-group">
+                        <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
+                            <span class="label" th:text="#{client.register.form.field.name}"/>
                         </div>
                         <input id="client_name" name="client_name" type="text" class="form-control"/>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-append col-lg-4">
-                            <span class="input-group-text" th:text="#{client.register.form.field.redirect-url}"/>
+                    <div class="input-group">
+                        <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
+                            <span class="label" th:text="#{client.register.form.field.redirect-url}"/>
                         </div>
                         <input id="redirect_url" name="redirect_url" type="text" class="form-control"/>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-append col-lg-4">
-                            <span class="input-group-text" th:text="#{client.register.form.field.type}"/>
+                    <div class="input-group">
+                        <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
+                            <span class="label" th:text="#{client.register.form.field.type}"/>
                         </div>
-                        <div>
-                            <select id="client_type" name="client_type" class="selectpicker form-control">
+                        <div class="col-lg-8 without-padding fill-content">
+                            <select id="client_type" name="client_type" class="form-control">
                                 <option value="PUBLIC">Public</option>
                                 <option value="CONFIDENTIAL">Confidential</option>
                             </select>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-append col-lg-4">
-                            <span class="input-group-text" th:text="#{client.register.form.field.scope}"/>
+                    <div class="input-group">
+                        <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
+                            <span class="label" th:text="#{client.register.form.field.scope}"/>
                         </div>
-                        <div>
-                            <select id="client_scope" name="client_scope" class="selectpicker form-control">
+                        <div class="col-lg-8 without-padding fill-content">
+                            <select id="client_scope" name="client_scope" class="form-control">
                                 <option value="READ">Read</option>
                                 <option value="WRITE">Write</option>
                             </select>
@@ -68,7 +68,7 @@
                 <button id="button_save" class="btn btn-primary" type="button" onclick="save()">
                     <span th:text="#{form.button.register}"/>
                 </button>
-                <button id="button_cancel" class="btn btn-default" type="button" data-dismiss="modal">
+                <button id="button_cancel" class="btn btn-danger" type="button" data-dismiss="modal">
                     <span th:text="#{form.button.cancel}"/>
                 </button>
             </div>
