@@ -6,6 +6,10 @@
     padding: 50px 50px;
 }
 
+.dialog-header-padding {
+
+}
+
 .fill-content {
     box-sizing: border-box;
     width: 100%;

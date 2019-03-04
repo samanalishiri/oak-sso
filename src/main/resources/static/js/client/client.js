@@ -1,6 +1,3 @@
-$(document).ready(function () {
-    $('.mdb-select').materialSelect();
-});
 
 function save() {
     postAjaxRequest("/client/save",
@@ -41,7 +38,6 @@ function createClientModel() {
 
 function openDialog() {
     $("#dialog_client_form").modal();
-    $(".selectpicker").selectpicker();
 }
 
 
