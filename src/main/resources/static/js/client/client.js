@@ -1,4 +1,3 @@
-document.getElementById("button_save").addEventListener("click", () => save());
 
 function save() {
     postAjaxRequest("/client/save",
@@ -38,12 +37,8 @@ function createClientModel() {
 }
 
 function openDialog() {
-    var dialog = document.getElementById("dialog_client_form");
-    dialog.setAttributeNode(document.createAttribute("open"));
+    $("#dialog_client_form").modal();
+    $(".selectpicker").selectpicker();
 }
 
-function closeDialog() {
-    var dialog = document.getElementById("dialog_client_form");
-    dialog.removeAttribute("open")
-}
 

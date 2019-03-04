@@ -28,9 +28,9 @@ function addRow(model) {
     var row = table.insertRow(idx++);
     row.setAttribute('model_id', model.id);
 
-    createTextCell(row, idx++, model.clientName);
+    createTextCell(row, idx++, model.name);
     createTextCell(row, idx++, model.redirectUrl);
-    createTextCell(row, idx++, model.clientType);
+    createTextCell(row, idx++, model.type);
 
     createButtonCell(row, idx++, 'View', 'button_view', () => view(model.id));
     createButtonCell(row, idx++, 'Edit', 'button_edit', () => edit(model.id));

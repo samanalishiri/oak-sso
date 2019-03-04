@@ -2,22 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="../webjars/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="../webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <script src="/jquery.min.js"></script>
+    <script src="../webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="/public.css" rel="stylesheet"/>
     <link href="/bootstrap-select.min.css" rel="stylesheet"/>
-    <title></title>
+    <script src="/bootstrap-select.min.js"></script>
+    <title>Home</title>
 </head>
 <body>
-
-<ul>
-    <li>
-        <button id="button_register_client" class="btn btn-primary">Register Client</button>
-    </li>
-</ul>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 vertical without-padding">
+            <button id="button_register_client" class="btn btn-primary fill-content">
+                <span th:text="#{menu.register-client}"/>
+            </button>
+        </div>
+        <div id="content_page" class="col-lg-10"></div>
+    </div>
+</div>
 </body>
-</html>
+
 <script type="text/javascript" th:src="@{/js/ajax/jsonUtils.js}"></script>
 <script type="text/javascript" th:src="@{/js/ajax/ajaxRequest.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/client/clienGrid.js}"></script>
+<script type="text/javascript" th:src="@{/js/client/client.js}"></script>
+
 <script type="text/javascript" th:src="@{/js/home/home.js}"></script>
-<script src="/jquery.min.js"></script>
-<script src="../webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

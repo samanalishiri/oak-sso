@@ -1,0 +1,16 @@
+.without-padding {
+    padding: 0px;
+}
+
+.dialog-padding {
+    padding: 50px 50px;
+}
+
+.fill-content {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+table thead tr th {
+    text-align: center;
+}

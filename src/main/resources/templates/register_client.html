@@ -1,83 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="../webjars/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-    <link href="/bootstrap-select.min.css" rel="stylesheet"/>
-    <title></title>
-</head>
-<body>
-<button id="button_add" class="btn btn-primary" type="button" onclick="openDialog()">
-    <span th:text="#{form.button.add}"/>
-</button>
-<div class="container">
-    <table id="client_grid" class="table-hover table-bordered" width="100%">
-        <thead>
-        <tr>
-            <th>Client Name</th>
-            <th>Redirect URL</th>
-            <th>Type</th>
-            <th colspan="3">Action</th>
-        </tr>
-        </thead>
-        <tbody id="client_grid_body">
-        </tbody>
-    </table>
+<div>
+    <div class="col-lg-1 without-padding">
+        <button id="button_add" class="btn btn-primary fill-content" type="button" onclick="openDialog()">
+            <span th:text="#{form.button.add}"/>
+        </button>
+    </div>
+    <div class="container-fluid without-padding">
+        <table id="client_grid" class="table-hover table-bordered" width="100%">
+            <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Redirect URL</th>
+                <th>Type</th>
+                <th colspan="3">Action</th>
+            </tr>
+            </thead>
+            <tbody id="client_grid_body">
+            </tbody>
+        </table>
+    </div>
 </div>
-</body>
-</html>
-
-<dialog id="dialog_client_form">
-    <div class="container-fluid">
-        <div class="jumbotron">
-            <h1><span th:text="#{client.register.title}"/></h1>
-        </div>
-        <form class="container">
-            <input id="client_id" name="client_id" type="hidden" value=""/>
-            <div class="form-group">
-                <label for="client_name"><span th:text="#{client.register.form.field.name}"/></label>
-                <input id="client_name" name="client_name" type="text" class="form-control"/>
+<div class="modal fade" id="dialog_client_form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header dialog-padding">
+                <h1><span th:text="#{client.register.title}"/></h1>
             </div>
-            <div class="form-group">
-                <label for="redirect_url"><span th:text="#{client.register.form.field.redirect-url}"/></label>
-                <input id="redirect_url" name="redirect_url" type="text" class="form-control"/>
+            <div class="modal-body dialog-padding">
+                <form role="form">
+                    <input id="client_id" name="client_id" type="hidden" value=""/>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append col-lg-4">
+                            <span class="input-group-text" th:text="#{client.register.form.field.name}"/>
+                        </div>
+                        <input id="client_name" name="client_name" type="text" class="form-control"/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append col-lg-4">
+                            <span class="input-group-text" th:text="#{client.register.form.field.redirect-url}"/>
+                        </div>
+                        <input id="redirect_url" name="redirect_url" type="text" class="form-control"/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append col-lg-4">
+                            <span class="input-group-text" th:text="#{client.register.form.field.type}"/>
+                        </div>
+                        <div>
+                            <select id="client_type" name="client_type" class="selectpicker form-control">
+                                <option value="PUBLIC">Public</option>
+                                <option value="CONFIDENTIAL">Confidential</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append col-lg-4">
+                            <span class="input-group-text" th:text="#{client.register.form.field.scope}"/>
+                        </div>
+                        <div>
+                            <select id="client_scope" name="client_scope" class="selectpicker form-control">
+                                <option value="READ">Read</option>
+                                <option value="WRITE">Write</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="client_type"><span th:text="#{client.register.form.field.type}"/></label>
-                <div>
-                    <select id="client_type" name="client_type" class="selectpicker form-control">
-                        <option value="PUBLIC">Public</option>
-                        <option value="CONFIDENTIAL">Confidential</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="client_scope"><span th:text="#{client.register.form.field.scope}"/></label>
-                <div>
-                    <select id="client_scope" name="client_scope" class="selectpicker form-control">
-                        <option value="READ">Read</option>
-                        <option value="WRITE">Write</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <button id="button_save" class="btn btn-primary" type="button">
+            <div class="modal-footer">
+                <button id="button_save" class="btn btn-primary" type="button" onclick="save()">
                     <span th:text="#{form.button.register}"/>
                 </button>
-                <button id="button_cancel" class="btn btn-default" type="button"
-                        onclick="closeDialog()">
+                <button id="button_cancel" class="btn btn-default" type="button" data-dismiss="modal">
                     <span th:text="#{form.button.cancel}"/>
                 </button>
             </div>
-        </form>
+        </div>
     </div>
-</dialog>
-
-<script type="text/javascript" th:src="@{/js/ajax/jsonUtils.js}"></script>
-<script type="text/javascript" th:src="@{/js/ajax/ajaxRequest.js}"></script>
-<script type="text/javascript" th:src="@{/js/ajax/clienGrid.js}"></script>
-<script type="text/javascript" th:src="@{/js/client/client.js}"></script>
-
-<script src="/jquery.min.js"></script>
-<script src="/bootstrap-select.min.js"></script>
-<script src="../webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</div>
