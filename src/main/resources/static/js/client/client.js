@@ -79,6 +79,7 @@ function selectScope(select) {
     }
 
     var row = document.createElement("div");
+    row.classList.add("row");
     row.classList.add("bg-light");
 
     var input = document.createElement("input");
@@ -87,9 +88,11 @@ function selectScope(select) {
     input.value = option.value;
     row.appendChild(input);
 
+    var textHolder = document.createElement("div");
+    textHolder.classList.add("col-lg-11");
     var text = document.createTextNode(option.firstChild.data);
-    row.appendChild(text);
-
+    textHolder.appendChild(text);
+    row.appendChild(textHolder);
 
     var i = document.createElement("i");
     i.classList.add("fa");
