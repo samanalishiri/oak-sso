@@ -1,39 +1,41 @@
+const POST = "POST";
+const PUT = "PUT";
+const GET = "GET";
+const DELETE = "DELETE";
 
-var CREATE_STATUS = 201;
 
-var SUCCESS_STATUS = 200;
+function createJsonResourceRequest(verb, url, data, beforeSuccess, success, afterSuccess) {
+    let token = sessionStorage.getItem("oauth_clientcredentials_token");
 
-function postAjaxRequest(url, data, success, afterSuccess) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("post", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.onreadystatechange = function () {
-            success(xhttp);
-            afterSuccess(xhttp);
-    };
-    xhttp.send(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open(verb, url);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + JSON.parse(token).access_token);
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            if (beforeSuccess != null) beforeSuccess(xhr);
+            if (success != null) success(xhr);
+            if (afterSuccess != null) afterSuccess(xhr);
+        }
+    });
+    xhr.send(data);
 }
 
-function getAjaxRequest(url, success){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("get", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.onreadystatechange = function () {
-            success(xhttp);
-    };
-    xhttp.send();
-}
+function createViewPageRequest(url, success) {
+    let token = sessionStorage.getItem("oauth_clientcredentials_token");
 
-function deleteAjaxRequest(url, success) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("delete", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === SUCCESS_STATUS)
-            success(xhttp);
-    };
-    xhttp.send();
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.open("GET", url);
+    xhr.setRequestHeader("Authorization", "Bearer " + JSON.parse(token).access_token);
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            if (success != null) success(xhr);
+        }
+    });
+
+    xhr.send();
 }
