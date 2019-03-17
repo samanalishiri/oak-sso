@@ -15,7 +15,7 @@ import static com.saman.sso.util.NumberUtils.generateUUID;
 
 @RestController
 @RequestMapping(value = "/", produces = "application/json")
-public class ClientRest {
+public class ClientResourceHandler {
 
     @Autowired
     private ClientRegistrationService oauthClientDetailsService;

@@ -2,7 +2,6 @@ package com.saman.sso.domain;
 
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,9 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "USERS", schema = "SSO")
-@Component
-public class UserEntity implements UserDetails {
-
+public class UserEntity extends AbstractAuditingEntity<Long, String> implements UserDetails {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
@@ -60,10 +57,12 @@ public class UserEntity implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
     private List<AuthorityEntity> authorities;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -138,4 +137,5 @@ public class UserEntity implements UserDetails {
     public void setAuthorities(List<AuthorityEntity> authorities) {
         this.authorities = authorities;
     }
+
 }

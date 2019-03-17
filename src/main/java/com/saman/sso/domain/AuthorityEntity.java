@@ -22,7 +22,7 @@ import java.util.List;
 @Entity
 @Table(name = "Authority", schema = "SSO")
 @Component
-public class AuthorityEntity implements GrantedAuthority {
+public class AuthorityEntity extends AbstractAuditingEntity<Long, String> implements GrantedAuthority {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
@@ -43,10 +43,12 @@ public class AuthorityEntity implements GrantedAuthority {
     @ManyToMany(mappedBy = "authorities", cascade = CascadeType.ALL)
     private List<UserEntity> users;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
