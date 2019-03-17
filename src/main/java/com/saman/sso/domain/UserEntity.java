@@ -1,6 +1,8 @@
 package com.saman.sso.domain;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "USERS", schema = "SSO")
+@Audited
 public class UserEntity extends AbstractAuditingEntity<Long, String> implements UserDetails {
 
     @Id
@@ -51,6 +54,7 @@ public class UserEntity extends AbstractAuditingEntity<Long, String> implements 
     @Type(type = "boolean")
     private boolean credentialsNonExpired = true;
 
+    @NotAudited
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USERS_AUTHORITY",
             joinColumns = @JoinColumn(name = "USERS_ID", referencedColumnName = "ID"),

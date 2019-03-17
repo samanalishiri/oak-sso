@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
+import javax.persistence.Version;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -32,6 +33,9 @@ public abstract class AbstractAuditingEntity<I, U> implements Serializable {
     @LastModifiedDate
     @Temporal(TIMESTAMP)
     protected Date lastModifiedDate;
+
+    @Version
+    protected Integer version;
 
     public abstract I getId();
 
@@ -67,6 +71,14 @@ public abstract class AbstractAuditingEntity<I, U> implements Serializable {
 
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override

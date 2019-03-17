@@ -5,8 +5,9 @@ package com.saman.sso.domain;
  */
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Authority", schema = "SSO")
-@Component
+@Audited
 public class AuthorityEntity extends AbstractAuditingEntity<Long, String> implements GrantedAuthority {
 
     @Id
@@ -40,6 +41,7 @@ public class AuthorityEntity extends AbstractAuditingEntity<Long, String> implem
     @Type(type = "boolean")
     private boolean enabled = true;
 
+    @NotAudited
     @ManyToMany(mappedBy = "authorities", cascade = CascadeType.ALL)
     private List<UserEntity> users;
 

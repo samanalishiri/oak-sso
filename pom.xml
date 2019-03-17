@@ -21,7 +21,7 @@
                 <role>developer</role>
                 <role>tester</role>
             </roles>
-            <url>samanalishiri.com</url>
+            <url>www.samanalishiri.com</url>
         </developer>
     </developers>
     <description></description>
@@ -67,6 +67,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-envers</artifactId>
+            <version>2.1.5.RELEASE</version>
+        </dependency>
+
 
         <!--hateoas-->
         <dependency>

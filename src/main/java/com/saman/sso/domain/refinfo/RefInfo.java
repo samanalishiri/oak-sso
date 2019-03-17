@@ -1,6 +1,7 @@
 package com.saman.sso.domain.refinfo;
 
 import com.saman.sso.domain.AbstractAuditingEntity;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.INTEGER, length = 4)
 @Table(name = "REF_INFO", schema = "sso")
+@Audited
 public abstract class RefInfo extends AbstractAuditingEntity<Integer, String> implements ReadOnlyRefInfo<Integer> {
 
     @Id
