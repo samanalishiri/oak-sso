@@ -1,6 +1,8 @@
 package com.saman.sso.business.service;
 
+import com.saman.sso.business.model.UserModel;
 import com.saman.sso.business.repository.UserRepository;
+import com.saman.sso.business.transform.UserTransformer;
 import com.saman.sso.domain.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,26 +17,28 @@ import java.util.Optional;
  * Saman Alishiri, samanalishiri@gmail.com
  */
 @Service(UserDetailsServiceImpl.BEAN_NAME)
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl extends AbstractService<Long, UserEntity, UserModel, UserRepository> implements UserDetailsService {
 
     public static final String BEAN_NAME = "userDetailsService";
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     @Qualifier(value = "userPasswordEncoder")
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public UserDetailsServiceImpl(UserRepository repository, UserTransformer transformer) {
+        super(repository, transformer);
+    }
+
     @Override
     public UserEntity loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s);
+        return repository.findByUsername(s);
     }
 
     public Optional<UserEntity> save(UserEntity entity) {
         String encodedPassword = passwordEncoder.encode(entity.getPassword());
         entity.setPassword(encodedPassword);
-        UserEntity user = userRepository.save(entity);
+        UserEntity user = repository.save(entity);
 
         return Optional.of(user);
     }
