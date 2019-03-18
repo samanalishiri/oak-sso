@@ -1,4 +1,4 @@
-package com.saman.sso.domain.refinfo;
+package com.saman.sso.domain.refdata;
 
 import com.saman.sso.domain.AbstractAuditingEntity;
 import org.hibernate.envers.Audited;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.INTEGER, length = 4)
 @Table(name = "REF_INFO", schema = "sso")
 @Audited
-public abstract class RefInfo extends AbstractAuditingEntity<Integer, String> implements ReadOnlyRefInfo<Integer> {
+public abstract class RefData extends AbstractAuditingEntity<Integer, String> implements ReadOnlyRefData<Integer> {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
