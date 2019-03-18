@@ -3,8 +3,6 @@ package com.saman.sso.business.service;
 import com.saman.sso.business.model.AbstractModel;
 import com.saman.sso.business.repository.SpringDataJpaRepository;
 import com.saman.sso.domain.AbstractAuditingEntity;
-import com.saman.sso.domain.refdata.ReadOnlyRefData;
-import com.saman.sso.domain.refdata.RefData;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -18,6 +16,10 @@ public abstract class AbstractBusinessService<I extends Serializable,
         implements CrudService<I, E, M>, SearchService<I, E, M> {
 
     private S service;
+
+    public AbstractBusinessService(S service) {
+        this.service = service;
+    }
 
     @Override
     public I save(M m) {
@@ -44,8 +46,4 @@ public abstract class AbstractBusinessService<I extends Serializable,
         return service.findAll();
     }
 
-    @Override
-    public Optional<Collection<ReadOnlyRefData<Integer>>> findAllRefData(Class<? extends RefData> c) {
-        return service.findAllRefData(c);
-    }
 }

@@ -4,17 +4,12 @@ import com.saman.sso.business.model.UserModel;
 import com.saman.sso.business.repository.UserRepository;
 import com.saman.sso.business.transform.UserTransformer;
 import com.saman.sso.domain.UserEntity;
-import com.saman.sso.domain.refdata.ReadOnlyRefData;
-import com.saman.sso.domain.refdata.RefData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Optional;
 
 /**
  * Saman Alishiri, samanalishiri@gmail.com
@@ -43,8 +38,4 @@ public class UserDetailsServiceImpl extends AbstractService<Long, UserEntity, Us
         model.setPassword(encodedPassword);
     }
 
-    @Override
-    public Optional<Collection<ReadOnlyRefData<Integer>>> findAllRefData(Class<? extends RefData> c) {
-        return Optional.empty();
-    }
 }
