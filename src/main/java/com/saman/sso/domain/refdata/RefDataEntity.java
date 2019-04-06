@@ -14,30 +14,31 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.INTEGER, length = 4)
+@DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.INTEGER, length = 6)
 @Table(name = "REF_INFO", schema = "sso")
 @Audited
-public abstract class RefData extends AbstractAuditingEntity<Integer, String> implements ReadOnlyRefData<Integer> {
+public abstract class RefDataEntity<I extends Serializable> extends AbstractAuditingEntity<I, String> implements ReadOnlyRefData<I> {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REF_INFO_GEN")
     @SequenceGenerator(name = "REF_INFO_GEN", sequenceName = "REF_INFO_SEQ")
-    private Integer id;
+    private I id;
 
     @Column(name = "NAME")
     private String name;
 
     @Override
-    public Integer getId() {
+    public I getId() {
         return id;
     }
 
     @Override
-    public void setId(Integer id) {
+    public void setId(I id) {
         this.id = id;
     }
 

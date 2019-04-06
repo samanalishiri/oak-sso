@@ -1,6 +1,8 @@
 package com.saman.sso.business.transform;
 
+import com.saman.sso.business.model.AbstractModel;
 import com.saman.sso.business.model.UserModel;
+import com.saman.sso.domain.AbstractAuditingEntity;
 import com.saman.sso.domain.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,12 +16,22 @@ public class UserTransformer extends Transformer<Long, UserEntity, UserModel> {
     private AuthorityTransformer authorityTransformer;
 
     @Override
+    public Class<? extends AbstractAuditingEntity> getEntity() {
+        return UserEntity.class;
+    }
+
+    @Override
+    public Class<? extends AbstractModel> getModel() {
+        return UserModel.class;
+    }
+
+    @Override
     public void transformFromEntityToModel(UserEntity input, UserModel output, int deep, String... relations) {
         output.setId(input.getId());
         output.setUsername(input.getUsername());
         output.setPassword(input.getPassword());
         output.setEmail(input.getEmail());
-        output.setAuthorities(authorityTransformer.transformFromEntitiesToModels(input.getAuthorities(), 1));
+        output.setAuthorities(authorityTransformer.transformFromEntitiesToModels(input::getAuthorities, 1));
     }
 
     @Override
@@ -28,7 +40,7 @@ public class UserTransformer extends Transformer<Long, UserEntity, UserModel> {
         output.setUsername(input.getUsername());
         output.setPassword(input.getPassword());
         output.setEmail(input.getEmail());
-        output.setAuthorities(authorityTransformer.transformFromModelsToEntities(input.getAuthorities(), 1));
+        output.setAuthorities(authorityTransformer.transformFromModelsToEntities(input::getAuthorities, 1));
     }
 
     @Override

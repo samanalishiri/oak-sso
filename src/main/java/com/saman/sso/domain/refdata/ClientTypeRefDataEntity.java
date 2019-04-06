@@ -5,5 +5,5 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(RefDataGroup.CLIENT_TYPE)
-public class ClientTypeRefDataEntity extends RefData {
+public class ClientTypeRefDataEntity extends RefDataEntity<Integer> {
 }

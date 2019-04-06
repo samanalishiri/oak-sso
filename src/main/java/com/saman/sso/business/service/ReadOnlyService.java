@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface SearchService<I extends Serializable, E extends AbstractAuditingEntity<I, String>, M extends AbstractModel<I>> {
+public interface ReadOnlyService<I extends Serializable, E extends AbstractAuditingEntity<I, String>, M extends AbstractModel<I>> {
 
     Optional<Collection<M>> findAll();
 

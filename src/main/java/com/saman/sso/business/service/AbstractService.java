@@ -17,12 +17,13 @@ public abstract class AbstractService<I extends Serializable,
         E extends AbstractAuditingEntity<I, String>,
         M extends AbstractModel<I>,
         R extends SpringDataJpaRepository<E, I>>
-        implements CrudService<I, E, M>, SearchService<I, E, M> {
+        implements CrudService<I, E, M>, ReadOnlyService<I, E, M> {
 
-    private final Class<? extends AbstractModel> model = (Class<? extends AbstractModel>) GenericUtils.extract(this.getClass(), 1);
-    private final Class<? extends AbstractAuditingEntity> entity = (Class<? extends AbstractAuditingEntity>) GenericUtils.extract(this.getClass(), 2);
+    protected final Class<? extends AbstractModel> model = (Class<? extends AbstractModel>) GenericUtils.extract(this.getClass(), 1);
+    protected final Class<? extends AbstractAuditingEntity> entity = (Class<? extends AbstractAuditingEntity>) GenericUtils.extract(this.getClass(), 2);
     protected R repository;
     protected Transformer<I, E, M> transformer;
+
     @Autowired
     protected MessageSourceHelper messageSource;
 

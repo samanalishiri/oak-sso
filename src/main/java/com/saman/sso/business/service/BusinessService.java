@@ -20,7 +20,7 @@ public class BusinessService<I extends Serializable,
         E extends AbstractAuditingEntity<I, String>,
         M extends AbstractModel<I>,
         R extends SpringDataJpaRepository<E, I>>
-        implements CrudService<I, E, M>, SearchService<I, E, M> {
+        implements CrudService<I, E, M>, ReadOnlyService<I, E, M> {
 
     private Class<E> entity = (Class<E>) GenericUtils.extract(this.getClass(), 1);
 
