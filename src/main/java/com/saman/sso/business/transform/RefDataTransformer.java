@@ -3,7 +3,7 @@ package com.saman.sso.business.transform;
 import com.saman.sso.business.model.RefDataModel;
 import com.saman.sso.domain.refdata.RefDataEntity;
 
-public abstract class RefDataTransformer extends Transformer<Integer, RefDataEntity<Integer>, RefDataModel> implements Cloneable {
+public abstract class RefDataTransformer extends Transformer<Integer, RefDataEntity<Integer>, RefDataModel> {
 
     public static final String NAME = "clientTypeRefDataTransformer";
 
@@ -24,8 +24,4 @@ public abstract class RefDataTransformer extends Transformer<Integer, RefDataEnt
         return new RefDataModel();
     }
 
-    @Override
-    public RefDataTransformer clone() throws CloneNotSupportedException {
-        return (RefDataTransformer) super.clone();
-    }
 }
