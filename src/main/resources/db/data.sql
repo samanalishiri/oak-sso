@@ -12,4 +12,13 @@ INSERT INTO AUTHORITY(ID, authority, enabled) VALUES (1, 'CREATE', TRUE);
 INSERT INTO USERS(ID, USERNAME, PASSWD, NON_EXPIRED, NON_LOCKED, password_non_EXPIRED, ENABLED)
   VALUES (1,'admin', /*admin1234*/'$2a$08$qvrzQZ7jJ7oy2p/msL4M0.l83Cd0jNsX6AJUitbgRXGzge4j035ha', TRUE, TRUE, TRUE, TRUE);
 INSERT INTO USERS_AUTHORITY(USERS_ID, AUTHORITY_ID) VALUES (1, 1);
+
+
+
+
+insert into ref_info (id, discriminator, name) values (1, 1, "Public");
+insert into ref_info (id, discriminator, name) values (2, 1, "Confidential");
+
+
+
 commit;

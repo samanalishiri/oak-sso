@@ -24,9 +24,6 @@ public abstract class Transformer<I extends Serializable, E extends AbstractAudi
     public static final int ZERO_DEEP = -1;
     public static final int EXIT = 0;
 
-    protected Class<? extends AbstractModel> model;
-    protected Class<? extends AbstractAuditingEntity> entity;
-
     @Autowired
     protected MessageSource messageSource;
 
@@ -59,8 +56,8 @@ public abstract class Transformer<I extends Serializable, E extends AbstractAudi
 
     public M[] transform(E[] entities, int deep, String... relations) {
         return CollectionUtils.isEmpty(entities)
-                ? (M[]) Array.newInstance(model, 0)
-                : Arrays.stream(entities).map(e -> transform(e, deep, relations)).toArray(size -> (M[]) Array.newInstance(model, size));
+                ? (M[]) Array.newInstance(getModel(), 0)
+                : Arrays.stream(entities).map(e -> transform(e, deep, relations)).toArray(size -> (M[]) Array.newInstance(getModel(), size));
     }
 
     public List<M> transformFromEntitiesToModels(Supplier<List<E>> entities, int deep, String... relations) {
@@ -97,8 +94,8 @@ public abstract class Transformer<I extends Serializable, E extends AbstractAudi
 
     public E[] transform(M[] models, int deep, String... relations) {
         return CollectionUtils.isEmpty(models)
-                ? (E[]) Array.newInstance(model, 0)
-                : Arrays.stream(models).map(e -> transform(e, deep, relations)).toArray(size -> (E[]) Array.newInstance(model, size));
+                ? (E[]) Array.newInstance(getModel(), 0)
+                : Arrays.stream(models).map(e -> transform(e, deep, relations)).toArray(size -> (E[]) Array.newInstance(getModel(), size));
     }
 
     public List<E> transformFromModelsToEntities(Supplier<List<M>> models, int deep, String... relations) {

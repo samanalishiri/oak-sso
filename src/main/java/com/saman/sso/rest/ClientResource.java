@@ -6,21 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.ClientRegistrationService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.saman.sso.util.NumberUtils.generateUUID;
 
 @RestController
-@RequestMapping(value = "/", produces = "application/json")
-public class ClientResourceHandler {
+@RequestMapping(value = "client", produces = "application/json")
+public class ClientResource {
 
     @Autowired
     private ClientRegistrationService oauthClientDetailsService;
 
-    @RequestMapping(value = "client/save", method = {RequestMethod.POST})
+    @PostMapping(value = "save")
     public ResponseEntity<Object> save(@RequestBody ClientModel model) {
 
         ClientDetailsModel app = new ClientDetailsModel();

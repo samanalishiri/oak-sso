@@ -1,23 +1,23 @@
 package com.saman.sso.business.service;
 
-
 import com.saman.sso.business.model.RefDataModel;
 import com.saman.sso.business.repository.RefDataRepository;
 import com.saman.sso.business.transform.ClientScopeRefDataTransformer;
 import com.saman.sso.business.transform.ClientTypeRefDataTransformer;
 import com.saman.sso.business.transform.RefDataTransformer;
+import com.saman.sso.config.ApplicationContextBean;
 import com.saman.sso.domain.refdata.ClientScopeRefDataEntity;
 import com.saman.sso.domain.refdata.ClientTypeRefDataEntity;
 import com.saman.sso.domain.refdata.RefDataEntity;
+import com.saman.sso.domain.refdata.RefDataEnum;
+import com.saman.sso.util.TripleMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.saman.sso.business.transform.Transformer.ZERO_DEEP;
@@ -29,27 +29,26 @@ public class RefDataServiceImpl implements RefDataService<Integer, RefDataEntity
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RefDataServiceImpl.class);
 
-    private Map<Class<? extends RefDataEntity>, RefDataTransformer> transformerRegistry = new HashMap<>();
+    private TripleMap<RefDataEnum, String, RefDataEntity> refDataMapping = new TripleMap<>();
+
     @Autowired
     private RefDataRepository repository;
 
+    @Autowired
+    private ApplicationContextBean applicationContextBean;
+
     public RefDataServiceImpl() {
-        transformerRegistry.put(ClientTypeRefDataEntity.class, new ClientTypeRefDataTransformer());
-        transformerRegistry.put(ClientScopeRefDataEntity.class, new ClientScopeRefDataTransformer());
+        refDataMapping.put(RefDataEnum.CLIENT_TYPE, ClientTypeRefDataTransformer.NAME, new ClientTypeRefDataEntity());
+        refDataMapping.put(RefDataEnum.CLIENT_SCOPE, ClientScopeRefDataTransformer.NAME, new ClientScopeRefDataEntity());
     }
 
     @Override
-    public Optional<Collection<RefDataModel>> findAllRefData(Class<? extends RefDataEntity<Integer>> c) {
+    public Optional<Collection<RefDataModel>> findAllRefData(RefDataEnum group) {
+        return Optional.ofNullable(
+                ApplicationContextBean.getBean(refDataMapping.get(group).getV1(), RefDataTransformer.class).transformFromEntitiesToModels(
+                        () -> repository.findAll(Example.of(refDataMapping.get(group).getV2())),
+                        ZERO_DEEP));
 
-        try {
-            RefDataTransformer transformer = transformerRegistry.get(c).clone();
-            return Optional.ofNullable(Collections.unmodifiableList(transformer.transformFromEntitiesToModels(repository::findAll, ZERO_DEEP)));
-
-        } catch (CloneNotSupportedException e) {
-            LOGGER.error(e.getMessage());
-        }
-
-        return Optional.empty();
     }
 
 }
