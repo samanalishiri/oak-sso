@@ -42,6 +42,12 @@
                     </div>
                     <div class="input-group form-element-padding">
                         <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
+                            <span class="label" th:text="#{client.register.form.field.access-token-validity-seconds}"/>
+                        </div>
+                        <input id="access_token_validity_seconds" name="access_token_validity_seconds" type="text" class="form-control"/>
+                    </div>
+                    <div class="input-group form-element-padding">
+                        <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
                             <span class="label" th:text="#{client.register.form.field.type}"/>
                         </div>
                         <div class="col-lg-8 without-padding fill-content">

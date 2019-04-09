@@ -39,7 +39,9 @@ function bindModel(model) {
     document.getElementById("client_id").value = model.id;
     document.getElementById("client_name").value = model.name;
     document.getElementById("redirect_uri").value = model.redirectUrl;
+    document.getElementById("access_token_validity_seconds").value = model.accessTokenValiditySeconds;
     document.getElementById("scopes").value = model.scopes;
+    document.getElementById("grantTypes").value = model.grantTypes;
 }
 
 function createClientModel() {
@@ -48,12 +50,19 @@ function createClientModel() {
         scopes.push(e.value);
     }
 
+    var grantTypes = [];
+    for (e of document.getElementsByName("grantTypes[]").values()) {
+        grantTypes.push(e.value);
+    }
+
     var model = {
         "id": document.getElementById("client_id").value,
         "name": document.getElementById("client_name").value,
         "redirectUri": document.getElementById("redirect_uri").value,
+        "accessTokenValiditySeconds": document.getElementById("access_token_validity_seconds").value,
         "type": document.getElementById("client_type").value,
         "scopes": scopes,
+        "grantTypes": grantTypes,
     };
 
     return JSON.stringify(model);

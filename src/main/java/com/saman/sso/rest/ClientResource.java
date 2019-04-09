@@ -31,7 +31,7 @@ public class ClientResource {
         app.setClientSecret(generateUUID());
         app.setAccessTokenValiditySeconds(model.getAccessTokenValiditySeconds());
         app.setScopes(model.getScopes());
-        app.setAuthorizedGrantTypes(model.getAuthorizedGrantTypes());
+        app.setAuthorizedGrantTypes(model.getGrantTypes());
 
         oauthClientDetailsService.addClientDetails(app);
 

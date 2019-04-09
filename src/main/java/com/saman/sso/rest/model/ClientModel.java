@@ -20,7 +20,7 @@ public class ClientModel {
 
     private Integer accessTokenValiditySeconds;
 
-    private Set<String> authorizedGrantTypes;
+    private Set<String> grantTypes;
 
     public String getId() {
         return id;
@@ -70,11 +70,11 @@ public class ClientModel {
         this.accessTokenValiditySeconds = accessTokenValiditySeconds;
     }
 
-    public Set<String> getAuthorizedGrantTypes() {
-        return authorizedGrantTypes;
+    public Set<String> getGrantTypes() {
+        return grantTypes;
     }
 
-    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
-        this.authorizedGrantTypes = authorizedGrantTypes;
+    public void setGrantTypes(Set<String> grantTypes) {
+        this.grantTypes = grantTypes;
     }
 }
