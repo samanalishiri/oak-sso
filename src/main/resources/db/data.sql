@@ -14,11 +14,13 @@ INSERT INTO USERS(ID, USERNAME, PASSWD, NON_EXPIRED, NON_LOCKED, password_non_EX
 INSERT INTO USERS_AUTHORITY(USERS_ID, AUTHORITY_ID) VALUES (1, 1);
 
 
-
-
 insert into ref_info (id, discriminator, name) values (1, 1, "Public");
 insert into ref_info (id, discriminator, name) values (2, 1, "Confidential");
-
-
+insert into ref_info (id, discriminator, name) values (3, 2, "Read");
+insert into ref_info (id, discriminator, name) values (4, 2, "Write");
+insert into ref_info (id, discriminator, name) values (5, 3, "Password");
+insert into ref_info (id, discriminator, name) values (6, 3, "Authorization Code");
+insert into ref_info (id, discriminator, name) values (7, 3, "Refresh Token");
+insert into ref_info (id, discriminator, name) values (8, 3, "Implicit");
 
 commit;

@@ -4,10 +4,12 @@ import com.saman.sso.business.model.RefDataModel;
 import com.saman.sso.business.repository.RefDataRepository;
 import com.saman.sso.business.transform.ClientScopeRefDataTransformer;
 import com.saman.sso.business.transform.ClientTypeRefDataTransformer;
+import com.saman.sso.business.transform.GrantTypeRefDataTransformer;
 import com.saman.sso.business.transform.RefDataTransformer;
 import com.saman.sso.config.ApplicationContextBean;
 import com.saman.sso.domain.refdata.ClientScopeRefDataEntity;
 import com.saman.sso.domain.refdata.ClientTypeRefDataEntity;
+import com.saman.sso.domain.refdata.GrantTypeRefDataEntity;
 import com.saman.sso.domain.refdata.RefDataEntity;
 import com.saman.sso.domain.refdata.RefDataEnum;
 import com.saman.sso.util.TripleMap;
@@ -40,6 +42,7 @@ public class RefDataServiceImpl implements RefDataService<Integer, RefDataEntity
     public RefDataServiceImpl() {
         refDataMapping.put(RefDataEnum.CLIENT_TYPE, ClientTypeRefDataTransformer.NAME, new ClientTypeRefDataEntity());
         refDataMapping.put(RefDataEnum.CLIENT_SCOPE, ClientScopeRefDataTransformer.NAME, new ClientScopeRefDataEntity());
+        refDataMapping.put(RefDataEnum.GRANT_TYPE, GrantTypeRefDataTransformer.NAME, new GrantTypeRefDataEntity());
     }
 
     @Override
