@@ -1,8 +1,16 @@
+
+function initClientGrid(){
+    
+}
+
 function save() {
     createJsonResourceRequest(POST, "/client/save",
         createClientModel(),
         null,
-        (xhr) => addRow(readModel(xhr)),
+        (xhr) => {
+            addRow(readModel(xhr));
+            closeDialog();
+        },
         (xhr) => closeDialog()
     );
 }
@@ -21,7 +29,10 @@ function edit() {
     createJsonResourceRequest(PUT, "/client/edit",
         data,
         (xhr) => deleteRow(data.id),
-        (xhr) => addRow(readModel(xhr)),
+        (xhr) => {
+            addRow(readModel(xhr));
+            closeDialog();
+        },
         (xhr) => closeDialog()
     );
 }

@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_approvals", schema = "sso")
+@Table(name = "OAUTH_APPROVALS", schema = "SSO")
 public class OauthApprovalsEntity {
 
     private Long id;

@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DISCRIMINATOR", discriminatorType = DiscriminatorType.INTEGER, length = 6)
-@Table(name = "REF_INFO", schema = "sso")
+@Table(name = "REF_INFO", schema = "SSO")
 @Audited
 public abstract class RefDataEntity<I extends Serializable> extends AbstractAuditingEntity<I, String> implements ReadOnlyRefData<I> {
 

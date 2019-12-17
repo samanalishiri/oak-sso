@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_client_details", schema = "sso")
+@Table(name = "OAUTH_CLIENT_DETAILS", schema = "SSO")
 public class OauthClientDetailsEntity {
     private String clientId;
     private String resourceIds;

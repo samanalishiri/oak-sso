@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "Authority", schema = "SSO")
+@Table(name = "AUTHORITY", schema = "SSO")
 @Audited
 public class AuthorityEntity extends AbstractAuditingEntity<Long, String> implements GrantedAuthority {
 

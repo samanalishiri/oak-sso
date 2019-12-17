@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_access_token", schema = "sso")
+@Table(name = "OAUTH_ACCESS_TOKEN", schema = "SSO")
 public class OauthAccessTokenEntity {
     private String tokenId;
     private byte[] token;
@@ -30,7 +31,8 @@ public class OauthAccessTokenEntity {
     }
 
     @Basic
-    @Column(name = "TOKEN")
+    @Lob
+    @Column(name = "TOKEN", length = 10000)
     public byte[] getToken() {
         return token;
     }
@@ -70,7 +72,8 @@ public class OauthAccessTokenEntity {
     }
 
     @Basic
-    @Column(name = "AUTHENTICATION")
+    @Lob
+    @Column(name = "AUTHENTICATION", length = 10000)
     public byte[] getAuthentication() {
         return authentication;
     }

@@ -6,17 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_refresh_token", schema = "sso")
+@Table(name = "OAUTH_REFRESH_TOKEN", schema = "SSO")
 public class OauthRefreshTokenEntity {
 
     private Long id;
     private String tokenId;
     private byte[] token;
-    private Long authentication;
+    private byte[] authentication;
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
@@ -40,7 +41,8 @@ public class OauthRefreshTokenEntity {
     }
 
     @Basic
-    @Column(name = "TOKEN")
+    @Lob
+    @Column(name = "TOKEN", length = 10000)
     public byte[] getToken() {
         return token;
     }
@@ -50,12 +52,13 @@ public class OauthRefreshTokenEntity {
     }
 
     @Basic
-    @Column(name = "AUTHENTICATION")
-    public Long getAuthentication() {
+    @Lob
+    @Column(name = "AUTHENTICATION", length = 10000)
+    public byte[] getAuthentication() {
         return authentication;
     }
 
-    public void setAuthentication(Long authentication) {
+    public void setAuthentication(byte[] authentication) {
         this.authentication = authentication;
     }
 

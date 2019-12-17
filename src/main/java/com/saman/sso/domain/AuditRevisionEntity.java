@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @RevisionEntity(AuditRevisionListener.class)
-@Table(name = "REVINFO", schema = "sso")
+@Table(name = "REVINFO", schema = "SSO")
 @AttributeOverrides({
         @AttributeOverride(name = "timestamp", column = @Column(name = "REVTSTMP")),
         @AttributeOverride(name = "id", column = @Column(name = "REV"))})

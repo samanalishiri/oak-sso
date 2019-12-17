@@ -4,12 +4,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_client_token", schema = "sso")
+@Table(name = "OAUTH_CLIENT_TOKEN", schema = "SSO")
 public class OauthClientTokenEntity {
     private String tokenId;
     private byte[] token;
@@ -28,7 +29,8 @@ public class OauthClientTokenEntity {
     }
 
     @Basic
-    @Column(name = "TOKEN")
+    @Lob
+    @Column(name = "TOKEN", length = 10000)
     public byte[] getToken() {
         return token;
     }

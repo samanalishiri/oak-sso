@@ -6,12 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oauth_code", schema = "sso")
+@Table(name = "OAUTH_CODE", schema = "SSO")
 public class OauthCodeEntity {
     private Long id;
     private String code;
@@ -39,7 +40,8 @@ public class OauthCodeEntity {
     }
 
     @Basic
-    @Column(name = "AUTHENTICATION")
+    @Lob
+    @Column(name = "AUTHENTICATION", length = 10000)
     public byte[] getAuthentication() {
         return authentication;
     }
