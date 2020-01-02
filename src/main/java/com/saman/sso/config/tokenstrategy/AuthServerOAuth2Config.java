@@ -75,7 +75,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
     }
 
     @Bean
-    public ClientRegistrationService clientRegistrationService() {
+    public JdbcClientDetailsService clientRegistrationService() {
         return new JdbcClientDetailsService(dataSource);
     }
 

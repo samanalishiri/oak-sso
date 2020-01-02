@@ -1,16 +1,30 @@
+function initClientGrid() {
+    let table = document.getElementById("client_grid").getElementsByTagName('tbody')[0];
+    table.innerHTML = "";
 
-function initClientGrid(){
-    
+    createJsonResourceRequest(GET, "/client/find/all",
+        null,
+        null,
+        (xhr) => initialGrid(readModel(xhr), addModelToGrid),
+        null,
+    );
 }
 
 function save() {
     createJsonResourceRequest(POST, "/client/save",
         createClientModel(),
         null,
-        (xhr) => {
-            addRow(readModel(xhr));
-            closeDialog();
-        },
+        (xhr) => addModelToGrid(readModel(xhr)),
+        (xhr) => closeDialog()
+    );
+}
+
+function edit() {
+    let data = createClientModel();
+    createJsonResourceRequest(PUT, "/client/edit",
+        data,
+        (xhr) => deleteRow("client_grid", data.id),
+        (xhr) => addModelToGrid(data),
         (xhr) => closeDialog()
     );
 }
@@ -24,50 +38,41 @@ function view(id) {
     );
 }
 
-function edit() {
-    var data = createClientModel();
-    createJsonResourceRequest(PUT, "/client/edit",
-        data,
-        (xhr) => deleteRow(data.id),
-        (xhr) => {
-            addRow(readModel(xhr));
-            closeDialog();
-        },
-        (xhr) => closeDialog()
-    );
-}
-
 function remove(id) {
     createJsonResourceRequest(DELETE, "/client/delete/" + id,
         null,
         null,
-        (xhr) => deleteRow(id),
+        (xhr) => deleteRow("client_grid", id),
         null
     );
 }
 
 function bindModel(model) {
     document.getElementById("client_id").value = model.id;
+    document.getElementById("client_secret").value = model.clientSecret;
     document.getElementById("client_name").value = model.name;
-    document.getElementById("redirect_uri").value = model.redirectUrl;
+    document.getElementById("redirect_uri").value = model.redirectUri;
     document.getElementById("access_token_validity_seconds").value = model.accessTokenValiditySeconds;
+
+    initDropDownWithRefData(document.getElementById("client_type"), 'CLIENT_TYPE', model.id);
     document.getElementById("scopes").value = model.scopes;
     document.getElementById("grantTypes").value = model.grantTypes;
 }
 
 function createClientModel() {
-    var scopes = [];
+    let scopes = [];
     for (e of document.getElementsByName("scopes[]").values()) {
         scopes.push(e.value);
     }
 
-    var grantTypes = [];
+    let grantTypes = [];
     for (e of document.getElementsByName("grantTypes[]").values()) {
         grantTypes.push(e.value);
     }
 
-    var model = {
+    let model = {
         "id": document.getElementById("client_id").value,
+        "clientSecret": document.getElementById("client_secret").value,
         "name": document.getElementById("client_name").value,
         "redirectUri": document.getElementById("redirect_uri").value,
         "accessTokenValiditySeconds": document.getElementById("access_token_validity_seconds").value,
@@ -78,7 +83,23 @@ function createClientModel() {
 
     return JSON.stringify(model);
 }
+function addModelToGrid(model, rowIndex = 0) {
+    let cell = 0;
 
+    let table = document.getElementById("client_grid").getElementsByTagName('tbody')[0];
+    let row = table.insertRow(rowIndex);
+    row.setAttribute('model_id', model.id);
+
+    createTextCell(row, cell++, model.name);
+    createTextCell(row, cell++, model.redirectUri);
+    createTextCell(row, cell++, model.type);
+
+    createButtonCell(row, cell++, 'View', 'button_view', () => view(model.id));
+    createButtonCell(row, cell++, 'Edit', 'button_edit', () => view(model.id));
+    createButtonCell(row, cell++, 'Delete', 'button_delete', () => remove(model.id));
+    // createHiddenCell(row, cell++,'"' + model.id + '"');
+
+}
 function openDialog() {
     $("#dialog_client_form").modal();
 }

@@ -35,7 +35,7 @@ function multiSelectDropdownAction(select, div, arrayName) {
     parent.appendChild(row);
 }
 
-function initDropDownWithRefData(select, group) {
+function initDropDownWithRefData(select, group, selectId) {
 
     select.innerHTML = "";
 
@@ -48,6 +48,9 @@ function initDropDownWithRefData(select, group) {
             for (var i in array) {
                 var option = document.createElement("option");
                 option.value = array[i].id;
+                if (selectId != null && array[i].id == selectId) {
+                    option.selected = true;
+                }
                 option.appendChild(document.createTextNode(array[i].name));
                 select.appendChild(option);
             }
