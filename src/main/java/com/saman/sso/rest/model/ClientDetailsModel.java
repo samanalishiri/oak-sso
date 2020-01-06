@@ -24,11 +24,17 @@ public class ClientDetailsModel extends BaseClientDetails {
     private String clientName;
     private ClientType clientType;
 
+    public ClientDetailsModel() {
+        if (Objects.isNull(super.getRegisteredRedirectUri())) {
+            super.setRegisteredRedirectUri(new LinkedHashSet<>());
+        }
+    }
+
     public static ClientDetails newInstance(ClientModel model) {
         ClientDetailsModel app = new ClientDetailsModel();
         app.setClientName(model.getName());
         app.addRedirectUri(model.getRedirectUri());
-        app.setClientType(model.getType());
+        app.setClientType(ClientType.instanceOf(model.getType()));
         app.setClientId(generateUUID());
         app.setClientSecret(generateUUID());
         app.setAccessTokenValiditySeconds(model.getAccessTokenValiditySeconds());
@@ -41,7 +47,7 @@ public class ClientDetailsModel extends BaseClientDetails {
         ClientDetailsModel app = new ClientDetailsModel();
         app.setClientName(model.getName());
         app.addRedirectUri(model.getRedirectUri());
-        app.setClientType(model.getType());
+        app.setClientType(ClientType.instanceOf(model.getType()));
         app.setClientId(model.getId());
         app.setClientSecret(model.getClientSecret());
         app.setAccessTokenValiditySeconds(model.getAccessTokenValiditySeconds());
@@ -57,7 +63,7 @@ public class ClientDetailsModel extends BaseClientDetails {
 
     @Override
     public Set<String> getRegisteredRedirectUri() {
-        return ofNullable(super.getRegisteredRedirectUri()).get();
+        return super.getRegisteredRedirectUri();
     }
 
     public String getClientName() {

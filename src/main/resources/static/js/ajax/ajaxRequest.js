@@ -15,9 +15,9 @@ function createJsonResourceRequest(verb, url, data, beforeSuccess, success, afte
     xhr.setRequestHeader("cache-control", "no-cache");
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-            if (beforeSuccess != null) beforeSuccess(xhr);
-            if (success != null) success(xhr);
-            if (afterSuccess != null) afterSuccess(xhr);
+            if (beforeSuccess != undefined && beforeSuccess != null) beforeSuccess(xhr);
+            if (success != undefined && success != null) success(xhr);
+            if (afterSuccess != undefined && afterSuccess != null) afterSuccess(xhr);
         }
     });
     xhr.send(data);

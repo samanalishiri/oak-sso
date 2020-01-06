@@ -1,7 +1,7 @@
 <div>
     <div class="row d-flex justify-content-start">
         <div class="col-lg-2">
-            <button id="button_add" class="btn btn-primary fill-content" type="button" onclick="openDialog()">
+            <button id="button_add" class="btn btn-primary fill-content" type="button" onclick="openNewDialog()">
                 <span th:text="#{form.button.add}"/>
             </button>
         </div>
@@ -34,34 +34,33 @@
 
             <div class="modal-body dialog-padding">
                 <form role="form">
-                    <input id="client_id" name="client_id" type="hidden" value=""/>
-                    <input id="client_secret" name="client_secret" type="hidden" value=""/>
+                    <input id="client_id" name="client_id" type="hidden" value="" data-toggle="modal"/>
+                    <input id="client_secret" name="client_secret" type="hidden" value="" data-toggle="modal"/>
                     <div class="input-group form-element-padding">
                         <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
                             <span class="label" th:text="#{client.register.form.field.name}"/>
                         </div>
-                        <input id="client_name" name="client_name" type="text" class="form-control"/>
+                        <input id="client_name" name="client_name" type="text" class="form-control"data-toggle="modal"/>
                     </div>
                     <div class="input-group form-element-padding">
                         <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
                             <span class="label" th:text="#{client.register.form.field.redirect-url}"/>
                         </div>
-                        <input id="redirect_uri" name="redirect_uri" type="text" class="form-control"/>
+                        <input id="redirect_uri" name="redirect_uri" type="text" class="form-control" data-toggle="modal"/>
                     </div>
                     <div class="input-group form-element-padding">
                         <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
                             <span class="label" th:text="#{client.register.form.field.access-token-validity-seconds}"/>
                         </div>
                         <input id="access_token_validity_seconds" name="access_token_validity_seconds" type="text"
-                               class="form-control"/>
+                               class="form-control" data-toggle="modal"/>
                     </div>
                     <div class="input-group form-element-padding">
                         <div class="input-group-append col-lg-4 d-flex justify-content-end fill-content">
                             <span class="label" th:text="#{client.register.form.field.type}"/>
                         </div>
                         <div class="col-lg-8 without-padding fill-content">
-                            <select id="client_type" name="client_type" class="form-control"
-                                    onfocus="initDropDownWithRefData(this, 'CLIENT_TYPE')">
+                            <select id="client_type" name="client_type" class="form-control">
                             </select>
                         </div>
                     </div>
@@ -71,7 +70,6 @@
                         </div>
                         <div class="col-lg-8 without-padding fill-content">
                             <select id="client_scope" name="client_scope" class="form-control"
-                                    onfocus="initDropDownWithRefData(this, 'CLIENT_SCOPE')"
                                     onchange="multiSelectDropdownAction(this, 'scope_elements','scopes[]');">
                             </select>
                         </div>
@@ -88,7 +86,6 @@
                         </div>
                         <div class="col-lg-8 without-padding fill-content">
                             <select id="grant_type" name="grant_type" class="form-control"
-                                    onfocus="initDropDownWithRefData(this, 'GRANT_TYPE')"
                                     onchange="multiSelectDropdownAction(this, 'grant_type_elements', 'grantTypes[]');">
                             </select>
                         </div>
@@ -106,8 +103,11 @@
                 <button id="button_save" class="btn btn-primary" type="button" onclick="save()">
                     <span th:text="#{form.button.register}"/>
                 </button>
-                <button id="button_cancel" class="btn btn-danger" type="button" onclick="closeDialog()">
-                    <span th:text="#{form.button.cancel}"/>
+                <button id="button_edit" class="btn btn-primary" type="button" onclick="edit()">
+                    <span th:text="#{form.button.apply}"/>
+                </button>
+                <button id="button_close" class="btn btn-danger" type="button" data-dismiss="modal" onclick="closeDialog()">
+                    <span th:text="#{form.button.close}"/>
                 </button>
             </div>
         </div>

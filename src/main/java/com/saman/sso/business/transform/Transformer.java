@@ -61,9 +61,10 @@ public abstract class Transformer<I extends Serializable, E extends AbstractAudi
     }
 
     public List<M> transformFromEntitiesToModels(Supplier<List<E>> entities, int deep, String... relations) {
-        return CollectionUtils.isEmpty(entities.get())
+        List<E> list = entities.get();
+        return CollectionUtils.isEmpty(list)
                 ? EMPTY_LIST
-                : entities.get().stream().map(e -> transform(e, deep, relations)).collect(Collectors.toList());
+                : list.stream().map(e -> transform(e, deep, relations)).collect(Collectors.toList());
     }
 
     public void beforeTransformFromModelToEntity(M m, int deep, String... relations) {
@@ -99,9 +100,10 @@ public abstract class Transformer<I extends Serializable, E extends AbstractAudi
     }
 
     public List<E> transformFromModelsToEntities(Supplier<List<M>> models, int deep, String... relations) {
-        return CollectionUtils.isEmpty(models.get())
+        List<M> list = models.get();
+        return CollectionUtils.isEmpty(list)
                 ? EMPTY_LIST
-                : models.get().stream().map(m -> transform(m, deep, relations)).collect(Collectors.toList());
+                : list.stream().map(m -> transform(m, deep, relations)).collect(Collectors.toList());
 
     }
 

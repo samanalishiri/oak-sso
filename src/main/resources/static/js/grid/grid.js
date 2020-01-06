@@ -1,4 +1,4 @@
-function deleteRow(tablename, id) {
+function removeRow(tablename, id) {
     var table = document.getElementById(tablename);
     var row = table.querySelectorAll('[model_id="' + id + '"]')[0];
     row.parentNode.removeChild(row);

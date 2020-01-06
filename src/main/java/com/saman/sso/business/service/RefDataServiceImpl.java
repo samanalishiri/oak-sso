@@ -49,8 +49,7 @@ public class RefDataServiceImpl implements RefDataService<Integer, RefDataEntity
     public Optional<Collection<RefDataModel>> findAllRefData(RefDataEnum group) {
         return Optional.ofNullable(
                 ApplicationContextBean.getBean(refDataMapping.get(group).getV1(), RefDataTransformer.class).transformFromEntitiesToModels(
-                        () -> repository.findAll(Example.of(refDataMapping.get(group).getV2())),
-                        ZERO_DEEP));
+                        () -> repository.findAll(Example.of(refDataMapping.get(group).getV2())), ZERO_DEEP));
 
     }
 

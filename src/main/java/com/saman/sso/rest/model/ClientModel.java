@@ -24,7 +24,7 @@ public class ClientModel {
 
     private String redirectUri = "";
 
-    private ClientType type = ClientType.UNKNOWN;
+    private String type = ClientType.UNKNOWN.name();
 
     private Set<String> scopes = new HashSet<>();
 
@@ -44,7 +44,7 @@ public class ClientModel {
 
         model.setScopes(clientDetails.getScope());
         model.setName(String.format("%s", clientDetails.getAdditionalInformation().get("clientName")));
-        model.setType(ClientType.instanceOf(String.valueOf(clientDetails.getAdditionalInformation().get("clientType"))));
+        model.setType(String.valueOf(ClientType.instanceOf(String.valueOf(clientDetails.getAdditionalInformation().get("clientType"))).getValue()));
 
         return model;
     }
@@ -82,11 +82,11 @@ public class ClientModel {
         this.redirectUri = redirectUri;
     }
 
-    public ClientType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ClientType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
