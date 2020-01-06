@@ -22,11 +22,12 @@ function save() {
 }
 
 function edit() {
-    let data = JSON.parse(createClientModel());
+    let data = createClientModel();
+    let model = JSON.parse(data);
     createJsonResourceRequest(PUT, "/client/edit",
         data,
-        (xhr) => removeRow("client_grid", data.id),
-        (xhr) => addModelToGrid(data),
+        (xhr) => removeRow("client_grid", model.id),
+        (xhr) => addModelToGrid(model),
         (xhr) => closeDialog()
     );
 }
